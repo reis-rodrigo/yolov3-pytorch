@@ -5,10 +5,10 @@ from yolov3.models import Darknet
 from yolov3.utils.utils import non_max_suppression, rescale_boxes
 from yolov3.utils.datasets import pad_to_square, resize
 
-def download_url(url, outdir):
-    print(f'Downloading files from {url}')
-    cmd = ['wget', '-c', url, '-P', outdir]
-    subprocess.call(cmd)
+# def download_url(url, outdir):
+#     print(f'Downloading files from {url}')
+#     cmd = ['wget', '-c', url, '-P', outdir]
+#     subprocess.call(cmd)
 
 
 class YOLOv3:
@@ -23,31 +23,33 @@ class YOLOv3:
 
         homedir = os.path.expanduser("~")
 
-        weights_path = os.path.join(homedir, '.torch/models/yolov3.weights')
-        os.makedirs(os.path.dirname(weights_path), exist_ok=True)
+        # weights_path = os.path.join(homedir, '.torch/models/yolov3.weights')
+        # os.makedirs(os.path.dirname(weights_path), exist_ok=True)
 
-        if not os.path.isfile(weights_path):
-            url = 'https://pjreddie.com/media/files/yolov3.weights'
-            outdir = os.path.dirname(weights_path)
-            download_url(url, outdir)
+        # if not os.path.isfile(weights_path):
+        #     url = 'https://pjreddie.com/media/files/yolov3.weights'
+        #     outdir = os.path.dirname(weights_path)
+        #     download_url(url, outdir)
 
-        model_def = os.path.join(homedir, '.torch/config/yolov3.cfg')
-        os.makedirs(os.path.dirname(model_def), exist_ok=True)
+        # model_def = os.path.join(homedir, '.torch/config/yolov3.cfg')
+        # os.makedirs(os.path.dirname(model_def), exist_ok=True)
 
-        if not os.path.isfile(model_def):
-            url = 'https://raw.githubusercontent.com/mkocabas/yolov3-pytorch/master/yolov3/config/yolov3.cfg'
-            outdir = os.path.dirname(model_def)
-            download_url(url, outdir)
+        # if not os.path.isfile(model_def):
+        #     url = 'https://raw.githubusercontent.com/mkocabas/yolov3-pytorch/master/yolov3/config/yolov3.cfg'
+        #     outdir = os.path.dirname(model_def)
+        #     download_url(url, outdir)
 
-        self.conf_thres = 0.8
-        self.nms_thres = 0.4
+        self.conf_thres = 0.39
+        self.nms_thres = 0.3
         self.img_size = img_size
         self.video = video
         self.person_detector = person_detector
         self.device = device
         self.return_dict = return_dict
-
+        
+        model_def = "/content/VIBE_yolov5/yolo/config/yolov3.cfg"
         self.model = Darknet(model_def, img_size=img_size).to(device)
+        weights_path = "/content/VIBE_yolov5/yolo/config/yolov3.weights"
         self.model.load_darknet_weights(weights_path)
         # self.model.load_state_dict(torch.load(weights_path))
         self.model.eval()
