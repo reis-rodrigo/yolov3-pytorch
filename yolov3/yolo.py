@@ -47,9 +47,9 @@ class YOLOv3:
         self.device = device
         self.return_dict = return_dict
         
-        model_def = "/content/VIBE_yolov5/yolo/config/yolov3.cfg"
+        model_def = "/content/VIBE/yolo/config/yolov3.cfg"
         self.model = Darknet(model_def, img_size=img_size).to(device)
-        weights_path = "/content/VIBE_yolov5/yolo/config/yolov3.weights"
+        weights_path = "/content/VIBE/yolo/config/yolov3.weights"
         self.model.load_darknet_weights(weights_path)
         # self.model.load_state_dict(torch.load(weights_path))
         self.model.eval()
