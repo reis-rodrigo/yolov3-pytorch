@@ -39,8 +39,8 @@ class YOLOv3:
         #     outdir = os.path.dirname(model_def)
         #     download_url(url, outdir)
 
-        self.conf_thres = 0.39
-        self.nms_thres = 0.3
+        self.conf_thres = 0.85
+        self.nms_thres = 0.4
         self.img_size = img_size
         self.video = video
         self.person_detector = person_detector
